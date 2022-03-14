@@ -28,22 +28,14 @@ Vue.filter("fromNow", function (value){
 });
 
 const store = new Vuex.Store(StoreDefinition);
-// const store = new Vuex.Store({
-//     state: {
-//         count: 0,
-//         name: 'john'
-//     },
-//     mutations: {
-//         increment (state) {
-//             console.log(state)
-//             state.count++
-//         },
-//         changeName(state, payload) {
-//             state.name = payload;
-//             console.log(state)
-//         }
-//     }
-// });
+window.axios.interceptors.response.use(
+    response => response,
+    error => {
+        if(error.response.status === 401) {
+            store.dispatch('logOut');
+        }
+        return Promise.reject(error);
+    });
 
 window.onload = function (){
 const app = new Vue({

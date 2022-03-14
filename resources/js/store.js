@@ -42,6 +42,7 @@ export default {
             if(lastSearch) {
                 context.commit('setLastSearch', JSON.parse(lastSearch));
             }
+            context.commit('setLoggedIn', isLoggedIn());
             const basket = localStorage.getItem('basket');
             if(basket) {
                 context.commit('setBasket', JSON.parse(basket));
@@ -73,7 +74,7 @@ export default {
        },
         logOut({commit}) {
             commit('setUser',{});
-            commit('isLoggedIn', false);
+            commit('setLoggedIn', false);
             logOut();
         }
     },

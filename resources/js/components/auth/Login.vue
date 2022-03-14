@@ -29,7 +29,7 @@
                     <hr/>
                     <div >
                        No Account yet?
-                        <router-link :to="{name: 'home'}" class="font-design">Register</router-link>
+                        <router-link :to="{name: 'register'}" class="font-design">Register</router-link>
                     </div>
                     <div>
                         Forgot your password?
@@ -60,12 +60,7 @@ export default {
            this.loading = true;
            this.errors = null;
            try{
-               await this.$store.dispatch('loadStoredState');
-               await axios.get('/sanctum/csrf-cookie').then(response => {
-                   console.log('response::')
-                   console.log(response)
-
-               });
+               await axios.get('/sanctum/csrf-cookie');
                await axios.post('/login',{
                    email: this.email,
                    password: this.password
